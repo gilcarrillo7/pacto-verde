@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+	font-family: "Barlow";
+	font-weight: 300;
+	overflow-x: hidden;
+}
+
+[contenteditable="true"]:empty:before {
+	content: attr(placeholder);
+	display: block;
+	color: white;
+}
+
+.gradient-home {
+	background: linear-gradient(225deg, #f5ff00 0%, #ff2eb6 100%);
+}
+
+.circle-home {
+	background: linear-gradient(225deg, #f5ff00 0%, rgba(245, 255, 0, 0) 100%);
+	width: 510px;
+	height: 510px;
+	border-radius: 100%;
+}
+.circle-menu {
+	background: linear-gradient(
+		225deg,
+		rgba(245, 255, 0, 0.8) 0%,
+		rgba(245, 255, 0, 0) 100%
+	);
+	width: 510px;
+	height: 510px;
+	border-radius: 100%;
+}
+.button-gradient {
+	&:hover {
+		background: linear-gradient(225deg, #f5ff00 0%, #ff2eb6 100%);
+	}
+}
