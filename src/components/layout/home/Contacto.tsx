@@ -27,7 +27,9 @@ const Contacto = (props) => {
 	const [loading, setLoading] = useState(false);
 	const [formMessage, setFormMessage] = useState("");
 	const comment = useRef(null);
-	const TOKEN = "";
+	const TOKEN =
+		typeof window !== "undefined" &&
+		window.btoa(`daniela.castro:P4ct0V3rd32022`);
 
 	const handleChanges = (e) => {
 		e.preventDefault();

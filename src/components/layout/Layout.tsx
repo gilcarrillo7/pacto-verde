@@ -28,7 +28,7 @@ const Layout = (props: IProps) => {
 		<>
 			<Helmet>
 				<meta charSet="utf-8" />
-				<title>Pacto Verde - {title}</title>
+				<title>Pacto Socio Ambiental - {title}</title>
 				<link rel="canonical" href="https://www.pactoverde.mx/" />
 				<meta property="og:site_name" content="Pacto Verde" />
 				<meta

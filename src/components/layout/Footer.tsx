@@ -61,7 +61,7 @@ const Footer = () => {
 					</a>
 				</div>
 				<div className="w-full sm:w-1/3 pt-4 sm:pt-0 order-2 sm:order-1 text-center sm:text-left">
-					© Pacto Verde México {new Date().getFullYear()}. Todos los derechos
+					© Pacto Socio Ambiental {new Date().getFullYear()}. Todos los derechos
 					reservados.
 				</div>
 				<div className="w-full sm:w-1/3 text-center sm:text-right pt-2 sm:pt-0 order-3 sm:order-3">

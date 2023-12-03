@@ -4,39 +4,71 @@
 
 html,
 body {
-	font-family: "Barlow";
-	font-weight: 300;
-	overflow-x: hidden;
+  font-family: "Barlow";
+  font-weight: 300;
+  overflow-x: hidden;
 }
 
 [contenteditable="true"]:empty:before {
-	content: attr(placeholder);
-	display: block;
-	color: white;
+  content: attr(placeholder);
+  display: block;
+  color: white;
 }
 
 .gradient-home {
-	background: linear-gradient(225deg, #f5ff00 0%, #ff2eb6 100%);
+  background: linear-gradient(225deg, #f5ff00 0%, #ff2eb6 100%);
 }
 
 .circle-home {
-	background: linear-gradient(225deg, #f5ff00 0%, rgba(245, 255, 0, 0) 100%);
-	width: 510px;
-	height: 510px;
-	border-radius: 100%;
+  background: linear-gradient(225deg, #f5ff00 0%, rgba(245, 255, 0, 0) 100%);
+  width: 510px;
+  height: 510px;
+  border-radius: 100%;
 }
 .circle-menu {
-	background: linear-gradient(
-		225deg,
-		rgba(245, 255, 0, 0.8) 0%,
-		rgba(245, 255, 0, 0) 100%
-	);
-	width: 510px;
-	height: 510px;
-	border-radius: 100%;
+  background: linear-gradient(
+    225deg,
+    rgba(245, 255, 0, 0.8) 0%,
+    rgba(245, 255, 0, 0) 100%
+  );
+  width: 510px;
+  height: 510px;
+  border-radius: 100%;
 }
 .button-gradient {
-	&:hover {
-		background: linear-gradient(225deg, #f5ff00 0%, #ff2eb6 100%);
-	}
+  &:hover {
+    background: linear-gradient(225deg, #f5ff00 0%, #ff2eb6 100%);
+  }
+}
+.carousel.carousel-slider {
+  overflow: visible !important;
+}
+.carousel.carousel-slider .control-arrow,
+.carousel.carousel-slider .control-arrow:hover {
+  opacity: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+}
+.carousel.carousel-slider .control-arrow.control-next {
+  right: -120px;
+}
+.carousel.carousel-slider .control-arrow.control-prev {
+  left: -120px;
+}
+.carousel.carousel-slider .control-arrow.control-next::before {
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="64" viewBox="0 -960 960 960" width="64" fill="%23FF2EB6" ><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" /></svg>') !important;
+  background-repeat: no-repeat !important;
+  opacity: 1 !important;
+  padding: 30px !important;
+  border-width: 0 !important;
+  margin: 0 !important;
+}
+.carousel.carousel-slider .control-arrow.control-prev::before {
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="64" viewBox="0 -960 960 960" width="64" fill="%23FF2EB6" ><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg>') !important;
+  background-repeat: no-repeat !important;
+  opacity: 1 !important;
+  padding: 30px !important;
+  border-width: 0 !important;
+  margin: 0 !important;
 }
