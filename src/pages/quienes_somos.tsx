@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
+import { ClipLoader } from "react-spinners";
 
 import Layout from "../components/layout/Layout";
 import Footer from "../components/layout/Footer";
@@ -11,6 +12,7 @@ import { useInView } from "react-intersection-observer";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Button from "../components/shared/Button";
 import ImageApi from "../components/shared/ImageApi";
+import Loader from "../components/shared/Loader";
 
 export const Circle = ({ className }: { className: string }) => {
   const { ref, inView } = useInView({ threshold: 0.3 });
@@ -78,14 +80,13 @@ const HeaderPactos = ({ text, subtext }) => {
   );
 };
 
-const Member = ({ img, title, content, index }) => {
+const Member = ({ img, title, content }) => {
   const [show, setShow] = useState(false);
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
-  const delay = `delay-[${index * 100}ms]`;
   return (
     <div
       ref={ref}
-      className={`px-12 sm:px-4 mb-12 transition-all duration-1000 ${delay} ${
+      className={`px-12 sm:px-4 mb-12 transition-all duration-1000 ${
         inView ? "opacity-100" : "opacity-0"
       }`}
     >
@@ -94,7 +95,9 @@ const Member = ({ img, title, content, index }) => {
           <p className="font-regular text-center text-pinkpv underline font-medium text-lg sm:text-xl">
             {title}
           </p>
-          <p className="font-normal text-left mt-4 text-sm leading-4">{content}</p>
+          <p className="font-normal text-left mt-4 text-sm leading-4">
+            {content}
+          </p>
           <button
             className="mt-4 w-full flex justify-center"
             onClick={() => setShow(false)}
@@ -170,57 +173,66 @@ const QuienesSomos = () => {
 
   return (
     <Layout title="Recursos">
-      {page && <HeaderPactos text={page?.title} subtext={page?.content} />}
-      <div className="container py-20 hidden sm:block">
-        <Carousel
-          showThumbs={false}
-          showArrows={true}
-          showStatus={false}
-          showIndicators={false}
-          preventMovementUntilSwipeScrollTolerance={true}
-          swipeScrollTolerance={50}
-          className=""
-          infiniteLoop={false}
-          autoPlay={false}
-        >
-          {slides.map((slide, i) => (
-            <div
-              key={`slide${i}`}
-              className="grid sm:grid-cols-3 lg:grid-cols-5"
+      {page ? (
+        <>
+          <HeaderPactos text={page?.title} subtext={page?.content} />
+          <div className="container py-20 hidden sm:block">
+            <Carousel
+              showThumbs={false}
+              showArrows={true}
+              showStatus={false}
+              showIndicators={false}
+              preventMovementUntilSwipeScrollTolerance={true}
+              swipeScrollTolerance={50}
+              className=""
+              infiniteLoop={false}
+              autoPlay={false}
             >
-              {members.slice(slide * 10, slide * 10 + 10).map((member, j) => (
-                <Member
-                  key={`member${j}`}
-                  img={member?.image}
-                  content={member?.content}
-                  title={member?.title}
-                  index={j}
-                />
+              {slides.map((slide, i) => (
+                <div
+                  key={`slide${i}`}
+                  className="grid sm:grid-cols-3 lg:grid-cols-5"
+                >
+                  {members
+                    .slice(slide * 10, slide * 10 + 10)
+                    .map((member, j) => (
+                      <Member
+                        key={`member${j}`}
+                        img={member?.image}
+                        content={member?.content}
+                        title={member?.title}
+                        index={j}
+                      />
+                    ))}
+                </div>
               ))}
-            </div>
-          ))}
-        </Carousel>
-      </div>
-      <div className="container py-20 block sm:hidden">
-        {members.slice(0, loadAll ? members.length : 10).map((member, j) => (
-          <div key={`member${j}`} className="mb-16">
-            <Member
-              img={member?.image}
-              content={member?.content}
-              title={member?.title}
-              index={j}
-            />
+            </Carousel>
           </div>
-        ))}
-        {!loadAll && page && (
-          <Button
-            text={page["more-text"]}
-            variant={"pinkwhite"}
-            action={() => setLoadAll(true)}
-          />
-        )}
-      </div>
-      <Footer />
+          <div className="container py-20 block sm:hidden">
+            {members
+              .slice(0, loadAll ? members.length : 10)
+              .map((member, j) => (
+                <div key={`member${j}`} className="mb-16">
+                  <Member
+                    img={member?.image}
+                    content={member?.content}
+                    title={member?.title}
+                  />
+                </div>
+              ))}
+            {!loadAll && page && (
+              <Button
+                text={page["more-text"]}
+                variant={"pinkwhite"}
+                action={() => setLoadAll(true)}
+              />
+            )}
+          </div>
+          <Footer />
+        </>
+      ) : (
+        <Loader />
+      )}
     </Layout>
   );
 };

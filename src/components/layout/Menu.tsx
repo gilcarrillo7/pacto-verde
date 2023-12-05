@@ -64,7 +64,7 @@ const Menu = () => {
 						<ImageApi
 							id={logos[1]}
 							alt={"Logo Pacto Verde"}
-							className={"ml-[60px]"}
+							className={"ml-[70px] w-[90px]"}
 						/>
 					)}
 				</div>

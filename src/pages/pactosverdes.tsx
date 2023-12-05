@@ -25,92 +25,95 @@ import thumb17 from "../images/recursos/thumb17.png";
 import { Circle, Ellipse } from "./blog";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
+import Loader from "../components/shared/Loader";
 
 const HeaderPactos = ({ text, subtext }) => {
-	return (
-		<section>
-			<div className="min-h-screen relative overflow-hidden gradient-home flex items-center sm:pt-[120px]">
-				<div className="container flex">
-					<div className="w-full md:w-2/3 md:pr-8 xl:pr-20">
-						<div className="text-white">
-							<p className="font-thin text-2xl sm:text-3xl md:text-4xl leading-snug mb-8">
-								{text}
-							</p>
-							<p className="text-xl sm:text-2xl md:text-3xl">{subtext}</p>
-						</div>
-						<div className="flex mt-12 gap-4 md:gap-6 justify-between sm:justify-normal">
-							<Circle className="bg-yellowpv delay-[1200ms]" />
-							<Circle className="bg-yellowpv delay-[1000ms]" />
-							<Circle className="bg-yellowpv delay-[800ms]" />
-						</div>
-					</div>
-					<div className="hidden md:flex md:w-1/3 flex-col">
-						<div className="flex justify-end gap-10 mb-8">
-							<Circle className="bg-pinkpv delay-[600ms]" />
-							<Circle className="bg-white delay-[400ms]" />
-						</div>
-						<div className="flex justify-between">
-							<Circle className="bg-yellowpv delay-[200ms] hidden xl:flex" />
-							<Ellipse className="bg-pinkpv" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+  return (
+    <section>
+      <div className="min-h-screen relative overflow-hidden gradient-home flex items-center sm:pt-[120px]">
+        <div className="container flex">
+          <div className="w-full md:w-2/3 md:pr-8 xl:pr-20">
+            <div className="text-white">
+              <p className="font-thin text-2xl sm:text-3xl md:text-4xl leading-snug mb-8">
+                {text}
+              </p>
+              <p className="text-xl sm:text-2xl md:text-3xl">{subtext}</p>
+            </div>
+            <div className="flex mt-12 gap-4 md:gap-6 justify-between sm:justify-normal">
+              <Circle className="bg-yellowpv delay-[1200ms]" />
+              <Circle className="bg-yellowpv delay-[1000ms]" />
+              <Circle className="bg-yellowpv delay-[800ms]" />
+            </div>
+          </div>
+          <div className="hidden md:flex md:w-1/3 flex-col">
+            <div className="flex justify-end gap-10 mb-8">
+              <Circle className="bg-pinkpv delay-[600ms]" />
+              <Circle className="bg-white delay-[400ms]" />
+            </div>
+            <div className="flex justify-between">
+              <Circle className="bg-yellowpv delay-[200ms] hidden xl:flex" />
+              <Ellipse className="bg-pinkpv" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 const Recursos = () => {
-	const { baseUrl } = useContext(AppContext);
+  const { baseUrl } = useContext(AppContext);
 
-	const [page, setPage] = useState<any>();
-	const [thumbs, setThumbs] = useState<IThumbProps[]>([]);
+  const [page, setPage] = useState<any>();
+  const [thumbs, setThumbs] = useState<IThumbProps[]>([]);
 
-	useEffect(() => {
-		axios
-			.get(
-				`${baseUrl}/pages?slug=pactos-verdes&timestamp=${new Date().getTime()}`
-			)
-			.then((res) => {
-				setPage(res.data[0].acf);
-			})
-			.catch((_error) => {});
-	}, [baseUrl]);
+  useEffect(() => {
+    axios
+      .get(
+        `${baseUrl}/pages?slug=pactos-verdes&timestamp=${new Date().getTime()}`
+      )
+      .then((res) => {
+        setPage(res.data[0].acf);
+      })
+      .catch((_error) => {});
+  }, [baseUrl]);
 
-	useEffect(() => {
-		axios
-			.get(
-				`${baseUrl}/posts?categories=8&per_page=100&timestamp=${new Date().getTime()}`
-			)
-			.then((res) => {
-				setThumbs(
-					res.data
-						.map((item) => ({
-							idImage: item.acf.image,
-							buttonText: item.acf.buttontext,
-							title: item.acf.title,
-							subsummary: item.acf.summary,
-							url: item.acf.url,
-							order: item.acf.order,
-						}))
-						.sort((a, b) => a.order - b.order)
-				);
-			})
-			.catch((_error) => {});
-	}, [baseUrl]);
+  useEffect(() => {
+    axios
+      .get(
+        `${baseUrl}/posts?categories=8&per_page=100&timestamp=${new Date().getTime()}`
+      )
+      .then((res) => {
+        setThumbs(
+          res.data
+            .map((item) => ({
+              idImage: item.acf.image,
+              buttonText: item.acf.buttontext,
+              title: item.acf.title,
+              subsummary: item.acf.summary,
+              url: item.acf.url,
+              order: item.acf.order,
+            }))
+            .sort((a, b) => a.order - b.order)
+        );
+      })
+      .catch((_error) => {});
+  }, [baseUrl]);
 
-	return (
-		<Layout title="Recursos">
-			{page && (
-				<HeaderPactos
-					text={page["header-text"] || ""}
-					subtext={page["header-subtext"] || ""}
-				/>
-			)}
-			<ThumbsContainer thumbs={thumbs} />
-			<Footer />
-		</Layout>
-	);
+  return (
+    <Layout title="Recursos">
+      {page ? (
+        <HeaderPactos
+          text={page["header-text"] || ""}
+          subtext={page["header-subtext"] || ""}
+        />
+      ) : (
+        <Loader />
+      )}
+      <ThumbsContainer thumbs={thumbs} />
+      <Footer />
+    </Layout>
+  );
 };
 
 export default Recursos;

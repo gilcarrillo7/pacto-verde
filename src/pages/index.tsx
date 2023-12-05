@@ -9,6 +9,7 @@ import Home3 from "../components/layout/home/Home3";
 import Home4 from "../components/layout/home/Home4";
 import Contacto from "../components/layout/home/Contacto";
 import { AppContext } from "../context/AppContext";
+import Loader from "../components/shared/Loader";
 
 const IndexPage = () => {
   const { baseUrl } = useContext(AppContext);
@@ -27,10 +28,14 @@ const IndexPage = () => {
   return (
     <Layout title="Home">
       <div id="inicio">
-        <Home1
-          head={(page && page["header-text"]) || ""}
-          button={(page && page["header-button"]) || ""}
-        />
+        {page ? (
+          <Home1
+            head={(page && page["header-text"]) || ""}
+            button={(page && page["header-button"]) || ""}
+          />
+        ) : (
+          <Loader />
+        )}
       </div>
       <div className="">
         <Home2
