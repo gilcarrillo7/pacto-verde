@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
-import { ClipLoader } from "react-spinners";
 
 import Layout from "../components/layout/Layout";
 import Footer from "../components/layout/Footer";

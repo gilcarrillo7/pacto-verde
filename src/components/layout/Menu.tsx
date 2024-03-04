@@ -83,9 +83,9 @@ const Menu = () => {
 								onClick={() => setMenuOpen(false)}
 							/>
 							<Option
-								text="Agenda"
+								text="Quiénes somos"
 								onClick={() => setMenuOpen(false)}
-								linkAnchor="/agenda"
+								linkAnchor="/quienes_somos"
 							/>
 							<Option
 								text="Pactos verdes mundiales"
@@ -94,6 +94,11 @@ const Menu = () => {
 							/>
 						</div>
 						<div className="flex flex-col sm:gap-4">
+							<Option
+								text="Agenda"
+								onClick={() => setMenuOpen(false)}
+								linkAnchor="/agenda"
+							/>
 							<Option
 								text="Revista"
 								link="/revista"
